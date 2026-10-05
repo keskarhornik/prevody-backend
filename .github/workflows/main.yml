@@ -19,4 +19,4 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /react/ # Optional: target folder on Endora (default is root)
+          # server-dir: /react/ # Optional: target folder on Endora (default is root)
