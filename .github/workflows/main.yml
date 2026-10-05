@@ -1,22 +1,24 @@
-name: Deploy to Endora Hosting
+name: Deploy to Endora via SFTP
 
 on:
   push:
     branches:
-      - main # Change to your target branch (e.g., master or production)
+      - main # Change to your branch name
 
 jobs:
-  web-deploy:
-    name: Deploy Files via FTP
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Sync files to Endora
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: SFTP Deploy
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          # server-dir: /react/ # Optional: target folder on Endora (default is root)
+          host: ${{ secrets.SFTP_SERVER }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: 22
+          local_path: './*' # Uploads everything from repository root
+          remote_path: '/web' # Replace with your web root folder on Endora (e.g. /web or /subdom/www)
+          sftp_only: true
