@@ -1,0 +1,22 @@
+name: Deploy to Endora Hosting
+
+on:
+  push:
+    branches:
+      - main # Change to your target branch (e.g., master or production)
+
+jobs:
+  web-deploy:
+    name: Deploy Files via FTP
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: Sync files to Endora
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /react/ # Optional: target folder on Endora (default is root)
