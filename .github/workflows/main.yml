@@ -20,5 +20,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 222
           local_path: ./ # Uploads everything from repository root
-          remote_path: '/public_html/web' # Replace with your web root folder on Endora (e.g. /web or /subdom/www)
+          remote_path: '/public_html/prevody-backend' # Replace with your web root folder on Endora (e.g. /web or /subdom/www)
           sftp_only: true
