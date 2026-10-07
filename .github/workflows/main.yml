@@ -19,6 +19,6 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: 222
-          local_path: './*' # Uploads everything from repository root
+          local_path: ./ # Uploads everything from repository root
           remote_path: '/web' # Replace with your web root folder on Endora (e.g. /web or /subdom/www)
           sftp_only: true
