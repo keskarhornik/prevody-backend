@@ -1,1 +1,3 @@
-<h1>GOGs</h1>
+<?php 
+    echo "Hello";
+?>
