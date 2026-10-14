@@ -4,13 +4,17 @@ header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
 
+require './mysqliOOP.php';
 // Check if it's a POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     // Access standard form fields via $_POST
     $email = $_POST['email'] ?? null;
     $password  = $_POST['password'] ?? null;
 
-    $db = new DataBaseConnection("","","","");
+    $config = require __DIR__ . '/config.php';
+
+    $db = new DataBaseConnection($config["host"],$config["user"],$config["pass"],$config["db"]);
 
     $vysledky = $db->dotazatSePrepared("SELECT password FROM uzivatele WHERE email=?","s",[$email]);
     
