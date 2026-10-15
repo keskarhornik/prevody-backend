@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $db = new DataBaseConnection($config["host"],$config["user"],$config["pass"],$config["db"]);
 
-    $vysledky = $db->dotazatSePrepared("SELECT password FROM uzivatele WHERE email=?","s",[$email]);
+    $vysledky = $db->dotazatSePrepared("SELECT password FROM Users WHERE email=?","s",[$email]);
     
     if (hash_equals($vysledky[0]["password"], $password)) {
         echo json_encode(['status' => 'success', 'message' => 'Hello']);
