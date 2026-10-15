@@ -7,7 +7,7 @@ header("Content-Type: application/json");
 require './mysqliOOP.php';
 // Check if it's a POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+    try {
     // Access standard form fields via $_POST
     $email = $_POST['email'] ?? null;
     $password  = $_POST['password'] ?? null;
@@ -25,6 +25,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     echo json_encode(['status' => 'error', 'message' => 'Invalid message']);
     exit;
+
+    
+    
+    } catch (Throwable $e) {
+        http_response_code(500);
+        echo json_encode([
+            'status' => 'error',
+            'message' => $e->getMessage(),
+        ]);
+    }
 }
 
 // Fallback for non-POST requests
