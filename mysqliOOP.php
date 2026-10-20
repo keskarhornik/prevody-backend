@@ -43,6 +43,29 @@
                 ]);
             }
         }
+
+        public function vlozitPrepared($query, $Sstring, $ParamArr) {
+            try{
+                $statement = $this->conn->prepare($query);
+                $statement->bind_param($Sstring, ...$ParamArr);
+                $statement->execute();
+                $result = $statement->get_result();
+                
+                return [
+                    'affected_rows' => $statement->affected_rows,
+                    'insert_id' => $statement->insert_id,
+                ];
+                
+            }
+            catch (Throwable $e) {
+                error_log((string) $e);
+                http_response_code(500);
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => $e->getMessage(), // Temporary debugging only
+                ]);
+            }
+        }
     }
 
 
