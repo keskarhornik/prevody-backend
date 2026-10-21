@@ -25,20 +25,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if($db->vlozitPrepared("INSERT INTO `SignInTokeny` (`idTokenu`, `casVytvoreni`, `token`, `idUsera`) VALUES (NULL, current_timestamp(), ?, ?)","ss",[$tokenHash, $vysledky[0]["id"]])["affected_rows"] > 0){
             echo json_encode([
                 'status' => 'success',
-                'token' => $token,
+                'message' => $token,
             ]);
             exit;
         }else {
             echo json_encode(
                 ['status' => 'error',
-                'token' => 'unexpected error']
+                'message' => 'unexpected error']
             );
         }
         
         
     }
 
-    echo json_encode(['status' => 'error', 'token' => 'Invalid message']);
+    echo json_encode(['status' => 'error', 'message' => 'Invalid message']);
     exit;
 
     
